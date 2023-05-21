@@ -1,15 +1,15 @@
-const { searchProducts } = require("../model/products.js");
-const { Layout } = require("../templates.js");
+const { searchProducts } = require('../model/products.js');
+const { Layout } = require('../templates.js');
 
 function get(req, res) {
-  const { search = "" } = req.query;
-  let title = "Search";
+  const { search = '' } = req.query;
+  let title = 'Search';
   let results;
   if (search) {
     results = searchProducts(search);
     title = `${results.length} results | Search products`;
   } else {
-    title = "Search products";
+    title = 'Search products';
   }
   const content = /*html*/ `
     <h1>Search products</h1>
@@ -29,19 +29,19 @@ function get(req, res) {
  * If we want to re-use it later we can move to templates.js
  */
 function Output(results) {
-  console.log(results);
+  // console.log(results);
   // There was no search
   if (!results) {
-    return "";
+    return '';
   }
   // There was a search, but no results
   if (!results.length) {
-    return "<h2>No results found</h2>";
+    return '<h2>No results found</h2>';
   }
   // There was a search and we got results
   return `
     <h2>Results</h2>
-    <ul>${results.map(Result).join("")}</ul>
+    <ul>${results.map(Result).join('')}</ul>
   `;
 }
 

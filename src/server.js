@@ -8,7 +8,7 @@ const server = express();
 
 server.get('/', products.get);
 // server.get("/product/:id", product.get);
-// server.get("/search", search.get);
+server.get('/search', search.get);
 // server.get("/new", add.get);
 // server.post("/new", express.urlencoded({ extended: false }), add.post);
 
