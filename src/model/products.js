@@ -19,13 +19,18 @@ const searchProducts = (searchString) => {
 };
 
 // get specific product
-const get_product = db.prepare(/*sql*/ `
+const get_product_from_products = db.prepare(/*sql*/ `
   SELECT id, name FROM products WHERE id = ?
 `);
 
+const get_product_from_categories = db.prepare(/*sql*/ `
+  SELECT name AS category_name, description AS category_description FROM categories WHERE id = ?
+`);
+
 const getProduct = (id) => {
-  console.log(get_product.get(id));
-  return get_product.get(id);
+  const products_product = get_product_from_products.get(id);
+  const categories_product = get_product_from_categories.get(id);
+  return { ...products_product, ...categories_product };
 };
 
 module.exports = { listProducts, searchProducts, getProduct };
