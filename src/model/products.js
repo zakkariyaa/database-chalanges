@@ -18,4 +18,14 @@ const searchProducts = (searchString) => {
   return search_products.all(searchString);
 };
 
-module.exports = { listProducts, searchProducts };
+// get specific product
+const get_product = db.prepare(/*sql*/ `
+  SELECT id, name FROM products WHERE id = ?
+`);
+
+const getProduct = (id) => {
+  console.log(get_product.get(id));
+  return get_product.get(id);
+};
+
+module.exports = { listProducts, searchProducts, getProduct };
