@@ -1,6 +1,4 @@
-const db = require("../database/db.js");
-
-module.exports = { listCategories };
+const db = require('../database/db.js');
 
 const select_categories = db.prepare(/*sql*/ `
   SELECT id, name FROM categories
@@ -9,3 +7,5 @@ const select_categories = db.prepare(/*sql*/ `
 function listCategories() {
   return select_categories.all();
 }
+
+module.exports = { listCategories };

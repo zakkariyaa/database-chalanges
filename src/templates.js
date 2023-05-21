@@ -1,5 +1,3 @@
-module.exports = { Layout, Table, AddProductForm };
-
 function Layout({ title, content }) {
   return /*html*/ `
     <!doctype html>
@@ -39,11 +37,11 @@ function Table({ caption, data }) {
         <caption>${caption} <small>(${data.length})</small></caption>
         <thead>
           <tr>
-            ${keys.map((key) => `<th>${key}</th>`).join("")}
+            ${keys.map((key) => `<th>${key}</th>`).join('')}
           </tr>
         </thead>
         <tbody>
-          ${data.map(Row).join("")}
+          ${data.map(Row).join('')}
         </tbody>
       </table>
     </div>
@@ -55,7 +53,7 @@ function Row(entry) {
     <tr>
       ${Object.values(entry)
         .map((val) => `<td>${val}</td>`)
-        .join("")}
+        .join('')}
     </tr>
   `;
 }
@@ -85,7 +83,7 @@ function AddProductForm({ title, categories, errors = {} }) {
       <p>
         <label>Category</label>
         <select name="category_id">
-          ${options.join("")}
+          ${options.join('')}
         </select>
       </p>
       <button>Create &plus;</button>
@@ -97,9 +95,11 @@ function validation(message) {
   if (message) {
     return `<span style="color: red">${message}</span>`;
   } else {
-    return "";
+    return '';
   }
 }
+
+module.exports = { Layout, Table, AddProductForm };
 
 const styles = /*css*/ `
   html {
