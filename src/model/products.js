@@ -9,6 +9,17 @@ const listProducts = () => {
   return select_products.all();
 };
 
+// create product
+const insert_product_products = db.prepare(/*sql*/ `
+  INSERT INTO products (name, quantity_per_unit, unit_price, category_id)
+  VALUES ($name, $quantity_per_unit, $unit_price, $category_id)
+  RETURNING id, name
+`);
+
+const createProduct = (product) => {
+  return insert_product_products.get(product);
+};
+
 // search products
 const search_products = db.prepare(/*sql*/ `
   SELECT id, name FROM products WHERE name LIKE '%' || ? || '%'
@@ -33,4 +44,4 @@ const getProduct = (id) => {
   return { ...products_product, ...categories_product };
 };
 
-module.exports = { listProducts, searchProducts, getProduct };
+module.exports = { createProduct, listProducts, searchProducts, getProduct };

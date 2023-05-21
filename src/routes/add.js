@@ -1,9 +1,9 @@
-const { Layout, AddProductForm } = require("../templates.js");
-const { listCategories } = require("../model/categories.js");
-const { createProduct } = require("../model/products.js");
+const { Layout, AddProductForm } = require('../templates.js');
+const { listCategories } = require('../model/categories.js');
+const { createProduct } = require('../model/products.js');
 
 function get(req, res) {
-  const title = "Add product";
+  const title = 'Add product';
   const categories = listCategories();
   const content = AddProductForm({ title, categories });
   const body = Layout({ title, content });
@@ -14,19 +14,19 @@ function post(req, res) {
   const { name, quantity_per_unit, unit_price, category_id } = req.body;
   const errors = {};
   if (!name) {
-    errors.name = "Please enter a product name";
+    errors.name = 'Please enter a product name';
   }
   if (!quantity_per_unit) {
-    errors.qty = "Please enter the quantity per unit";
+    errors.qty = 'Please enter the quantity per unit';
   }
   if (!unit_price) {
-    errors.qty = "Please enter a price";
+    errors.qty = 'Please enter a price';
   }
   if (!category_id) {
-    errors.qty = "Please select a category";
+    errors.qty = 'Please select a category';
   }
   if (Object.keys(errors).length > 0) {
-    const title = "Error: Add product";
+    const title = 'Error: Add product';
     const categories = listCategories();
     const content = AddProductForm({ title, categories, errors });
     const body = Layout({ title, content });
