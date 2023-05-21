@@ -2,8 +2,8 @@ const db = require('../database/db.js');
 
 // retreive products
 const select_products = db.prepare(/*sql*/ `
-  SELECT id, name, quantity_per_unit, unit_price, units_in_stock, units_on_order,
-  unit_price * units_in_stock AS stock_value FROM products
+  SELECT id, name, quantity_per_unit, printf('£%.2f', unit_price) as unit_price,
+  units_in_stock, units_on_order, printf('£%.2f', unit_price * units_in_stock) AS stock_value FROM products
 `);
 
 const listProducts = () => {
