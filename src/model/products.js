@@ -31,18 +31,21 @@ const searchProducts = (searchString) => {
 };
 
 // get specific product
-const get_product_from_products = db.prepare(/*sql*/ `
-  SELECT id, name FROM products WHERE id = ?
+const select_product = db.prepare(/*sql*/ `
+  SELECT
+    products.id,
+    products.name,
+    categories.name AS category_name,
+    categories.description AS category_description
+  FROM products
+  JOIN categories ON products.category_id = categories.id
+  WHERE products.id = ?
 `);
 
-const get_product_from_categories = db.prepare(/*sql*/ `
-  SELECT name AS category_name, description AS category_description FROM categories WHERE id = ?
-`);
+console.log(select_product);
 
-const getProduct = (id) => {
-  const products_product = get_product_from_products.get(id);
-  const categories_product = get_product_from_categories.get(id);
-  return { ...products_product, ...categories_product };
-};
+function getProduct(id) {
+  return select_product.get(id);
+}
 
 module.exports = { createProduct, listProducts, searchProducts, getProduct };

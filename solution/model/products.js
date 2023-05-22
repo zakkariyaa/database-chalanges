@@ -1,4 +1,4 @@
-const db = require("../database/db.js");
+const db = require('../database/db.js');
 
 module.exports = { listProducts, getProduct, searchProducts, createProduct };
 
@@ -42,7 +42,7 @@ const search_products = db.prepare(/*sql*/ `
 `);
 
 function searchProducts(search_term) {
-  return search_products.all("%" + search_term + "%");
+  return search_products.all('%' + search_term + '%');
 }
 
 const insert_product = db.prepare(/*sql*/ `
